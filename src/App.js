@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Monsters</h1>
       <SearchBox changed={onSearchChangeHandler} placeholder='Search' />
       <CardList monsters={filteredMonsters} />
     </div>
