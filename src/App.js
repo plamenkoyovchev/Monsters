@@ -6,21 +6,20 @@ import SearchBox from './components/UI/SearchBox/SearchBox';
 
 function App() {
   const [monsters, setMonsters] = useState([]);
-  const [filteredMonsters, setFilteredMonsters] = useState([]);
+  const [searchText, setSearchText] = useState('');
+
+  const filteredMonsters = monsters.filter(monster =>
+    monster.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   useEffect(() => {
     fetch('http://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(monsters => {
-        setMonsters(monsters);
-        setFilteredMonsters(monsters);
-      });
+      .then(monsters => setMonsters(monsters));
   }, []);
 
   const onSearchChangeHandler = (event) => {
-    setFilteredMonsters(monsters.filter(monster =>
-      monster.name.toLowerCase().includes(event.target.value.toLowerCase())
-    ));
+    setSearchText(event.target.value);
   };
 
   return (
